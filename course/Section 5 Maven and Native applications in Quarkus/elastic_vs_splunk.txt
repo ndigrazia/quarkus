@@ -1,0 +1,31 @@
+												Elasticsearch     							Splunk
+
+
+License											Open Source									commercial 
+Only available as a cloud service				no											no
+Implementation language (base tech)				Java										Python/c++
+Data scheme										yes. Flexible type definitions. 			yes. Flexible type definitions. 			
+XML support										no											yes
+Predefined data ty	pes							yes											yes	
+Secondary indexes								yes. All search fields are 					yes. All search fields are 
+												automatically indexed						automatically indexed
+Support of SQL									SQL-like query language						no		
+Access methods									Java API/RESTful HTTP/JSON API				API REST
+Partitioning methods							Sharding									Sharding
+Redundantly storing data on multiple nodes		yes											yes	
+Consistency concepts							Eventual Consistency						Eventual Consistency
+Query language									Query DSL (Domain Specific Language)		SPL
+												based on JSON 											
+Transaction concepts							no											no
+Support for concurrent manipulation of data		yes											yes	
+data persistent									yes											yes
+In-memory capabilities							Memcached and Redis integration				no	
+Soporte
+geolocation support								yes											no	
+Access control	(out of the box)				no (yes paid)								RBAC
+Contributors 									1,680										No identified (commercial)
+Learning curve 									low											moderate
+Vendor Lock-in									no	 										yes
+Alert (out of the box)							no											yes
+google trends (ultimo año)						58											80									
+DB-Engines Ranking (score)						158.25										90.61								

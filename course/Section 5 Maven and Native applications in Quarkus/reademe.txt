@@ -1,0 +1,71 @@
+mvn io.quarkus:quarkus-maven-plugin:1.2.1.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId=maven-example -DclassName="tech.donau.BookRepository" -Dpath="/book" -Dextension="smallrye-fault-tolerance,vertx-web,resteasy-jsonb"
+	
+.\mvnw quarkus:add-extension -Dextensions="resteasy-jsonb"
+
+.\mvnw quarkus:add-extension -Dextensions="hibernate-*"
+
+.\mvnw quarkus:dev
+
+.\mvnw package
+
+
+
+List all de dependecies
+Add pom.xml
+
+	<plugin>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bootstrap-maven-plugin</artifactId>
+        <version>${quarkus-plugin.version}</version>
+    </plugin>
+	
+.\mvnw quarkus-bootstrap:build-tree
+
+
+ Building Native image with Maven
+ -----------------------------------------------
+ 
+ 
+ 1. Install GralVM
+ 
+	sudo apt-get update
+	
+	apt-get install -y build-essential libz-dev
+ 
+	curl https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-linux-amd64-20.2.0.tar.gz
+	tar -xzf graalvm-ce-java11-linux-amd64-20.2.0.tar.gz
+	export PATH=/vagrant/graalvm-ce-java11-20.2.0/bin:$PATH	
+	export JAVA_HOME=/vagrant/graalvm-ce-java11-20.2.0	
+	  
+	gu install native-image	
+	 
+	 
+ 2. install docker
+ 
+	sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	sudo apt-get update
+	sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+	
+ 3. create  the project
+ 
+ mvn io.quarkus:quarkus-maven-plugin:1.2.1.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId=native-image -DclassName="tech.donau.GreetingResource" -Dpath="/hello" 
+
+ 4. Generate package
+ 
+	./mvnw package -Pnative
+	
+ 5. Generate package & docker image
+ 
+	./mvnw package -Pnative -Dquarkus.native.container-build=true
+	
+	docker build -f src/main/docker/Dockerfile.native -t quarkus/native-image .
+
+ 6. Then run the container using:
+
+	docker run -i --rm -p 8080:8080 quarkus/native-image
+
+https://developers.redhat.com/articles/2021/09/21/distributed-transaction-patterns-microservices-compared#the_modular_monolith	
+	
+	
