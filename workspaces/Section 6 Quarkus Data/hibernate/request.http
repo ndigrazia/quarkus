@@ -1,0 +1,22 @@
+POST http://localhost:9090/weather HTTP/1.1
+content-type: application/json
+
+{
+    "name": "samplec"
+}
+
+###
+GET http://localhost:9090/weather HTTP/1.1
+content-type: application/json
+
+###
+DELETE http://localhost:9090/weather/1 HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:9090/weather/alter/search HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:9090/weather/alter/search?pattern=stu* HTTP/1.1
+content-type: application/json

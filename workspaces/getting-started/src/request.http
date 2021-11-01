@@ -1,0 +1,13 @@
+
+#GET http://localhost:8080/hello
+#content-type: text/plain
+
+#POST http://localhost:8080/hello?token=dev HTTP/1.1
+#content-type: application/json
+
+#{
+#    "name": "sample"
+#}
+
+GET http://localhost:8080/hello/html/22/details
+content-type: text/plain
