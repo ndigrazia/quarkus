@@ -115,3 +115,40 @@ quarkus.hibernate-orm.database.generation=drop-and-create
 quarkus.hibernate-orm.dialect=org.hibernate.dialect.MySQL8Dialect
 
 
+ Reactive SQL Clients
+ 
+ 
+ mvn io.quarkus:quarkus-maven-plugin:1.2.1.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId=reactive-database-client -DclassName="tech.donau.BookResource" -Dpath="/book" -Dextensions="resteasy,reactive-mysql-client,quarkus-resteasy-jsonb"
+
+mvn io.quarkus.platform:quarkus-maven-plugin:2.3.1.Final:create -DprojectGroupId="org.acme" -DprojectArtifactId=reactive-mysql-client-quickstart     -DclassName="org.acme.vertx.FruitResource" -Dpath="/fruits" -Dextensions="resteasy,reactive-mysql-client,resteasy-mutiny, quarkus-resteasy-jsonb"
+
+quarkus.datasource.url=vertx-reactive:jdbc:mysql://localhost:3310/hello
+quarkus.datasource.username=root
+quarkus.datasource.password=root
+
+MongoDB Client
+
+mvn io.quarkus:quarkus-maven-plugin:1.2.1.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId=mongo-client -DclassName="tech.donau.BookResource" -Dpath="/books" -Dextensions="resteasy-jsonb,mongodb-client" 
+
+docker run -ti --rm -p 27017:27017 mongo:4.0
+
+MongoDB with Panache
+
+mvn io.quarkus:quarkus-maven-plugin:1.2.1.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId=mongo-client-panache -DclassName="tech.donau.BookResource" -Dpath="/books" -Dextensions="resteasy-jsonb,mongodb-panache"
+
+
+Add extensions: .\mvnw quarkus:add-extension -Dextensions=resteasy-reactive-jackson
+
+mvn io.quarkus.platform:quarkus-maven-plugin:2.3.1.Final:create -DprojectGroupId="org.acme" -DprojectArtifactId=mongodb-panache-quickstart -DclassName="org.acme.mongodb.panache.PersonResource" -Dpath="/persons" -Dextensions="resteasy-reactive-jackson,mongodb-panache"
+
+Neo4j Client
+
+mvn io.quarkus:quarkus-maven-plugin:1.2.1.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId=neo4j -DclassName="tech.donau.BookResource" -Dpath="/books" -Dextensions="neo4j,resteasy-jsonb"
+
+docker run --publish=7474:7474 --publish=7687:7687 -e 'NEO4J_AUTH=	/secret' neo4j:4.0.0
+
+quarkus.neo4j.uri = bolt://localhost:7687
+quarkus.neo4j.authentication.username = neo4j
+quarkus.neo4j.authentication.password = secret
+
+

@@ -1,0 +1,20 @@
+GET http://localhost:9090/books HTTP/1.1
+content-type: application/json
+
+###
+POST http://localhost:9090/books HTTP/1.1
+content-type: application/json
+
+{
+    "title": "sample1",
+    "pages": 222
+}
+
+###
+POST http://localhost:9090/books/fruits HTTP/1.1
+content-type: application/json
+
+{
+    "name": "applet",
+    "calories": 222
+}
