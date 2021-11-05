@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "3928e211-40ef-4885-a0fa-6e1861383881",
+		"name": "keycloak-quarkus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8180/auth/realms/quarkus/protocol/openid-connect/token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "67dc5355-3482-4e5f-8c4e-75bec253c672",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "backend-service",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "backend-service",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "f9859939-4184-4d62-8011-f93f8426c986",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8180/auth/realms/quarkus/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8180",
+					"path": [
+						"auth",
+						"realms",
+						"quarkus",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9090/users",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true,
+					"user-agent": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjZklBRE5feHhDSm1Wa1d5Ti1QTlhFRXZNVVdzMnI2OEN4dG1oRUROelhVIn0.eyJleHAiOjE2MzYxNDIzMTcsImlhdCI6MTYzNjE0MjAxNywianRpIjoiZjA0M2EzNzktNDdlMy00NGNjLWJmMjktZTM3ZjViZTU0NzY1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL2F1dGgvcmVhbG1zL3F1YXJrdXMiLCJzdWIiOiJhZjEzNGNhYi1mNDFjLTQ2NzUtYjE0MS0yMDVmOTc1ZGI2NzkiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJiYWNrZW5kLXNlcnZpY2UiLCJzZXNzaW9uX3N0YXRlIjoiZWQzNTU5YzctZDA3Ny00MTQzLTk3MzMtNmQ1MTNhNTFmOTJmIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImVkMzU1OWM3LWQwNzctNDE0My05NzMzLTZkNTEzYTUxZjkyZiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.gm6tXhG1b1BBQoH0pRBVPlRRN7OLG6MO18saOQTW8dENeMSSOqGZCDebIHFuRRNzctFxeXnnm_zTbWH4XMHXs6IqC0T3VbGsw7rIQa_DBAlt0A3qj8F2xePnjdYV6yLlqs-qFWEp4Mfn8Umco0zPuI3AU1VBXLpCp5B0D7nx5UB7YBHabyleI1sVQJ7GrE_rRbFFic7lv-ZrWmrk9p0GsDy5K0wFDwZ5X5wPydDwEXjDbE4oG4YKB02WlPIOlP-wPQxkc2JpBRb9Nrkkc-7y79ISb5Nf_QkigiIpEz23qH50CE9AamIurH4Nz0F8XQ59HBshPJRQQT0VYPBEG8fplw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9090/api/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
