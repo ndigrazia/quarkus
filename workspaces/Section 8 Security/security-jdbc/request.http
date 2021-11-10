@@ -1,0 +1,12 @@
+GET http://127.0.0.1:8080/api/public
+content-type: application/json
+
+####
+GET http://127.0.0.1:8080/api/public/admin
+content-type: application/json
+Authorization: Basic admin:admin
+
+####
+GET http://127.0.0.1:8080/api/public/me
+content-type: application/json
+Authorization: Basic user:user

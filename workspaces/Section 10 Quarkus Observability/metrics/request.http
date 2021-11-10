@@ -1,0 +1,17 @@
+GET http://localhost:8080/metrics
+Accept: application/json
+
+####
+
+GET http://127.0.0.1:8080/random
+content-type: application/json
+
+####
+
+GET http://127.0.0.1:8080/97
+content-type: application/json
+
+####
+
+GET http://localhost:8080/metrics/application
+Accept: application/json

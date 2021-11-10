@@ -1,0 +1,11 @@
+GET http://127.0.0.1:8080/secured/permit-all
+content-type: application/json
+
+####
+POST http://127.0.0.1:8080/secured?username=ndigrazia&email=nelson.digrazia@gmail.com&birthdate="10/04/1975"
+content-type: application/json
+
+####
+GET http://127.0.0.1:8080/secured/roles-allowed
+content-type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJEb25hdVRlY2giLCJ1cG4iOiJuZWxzb24uZGlncmF6aWFAZ21haWwuY29tIiwic3ViIjoibmVsc29uLmRpZ3JhemlhQGdtYWlsLmNvbSIsImF1ZCI6InVzaW5nLWp3dCIsImdyb3VwcyI6WyJVc2VyIiwiQWRtaW4iXSwiYmlydGhkYXRlIjoiMjAwMS0wNy0xMyIsInByZWZlcnJlZF91c2VybmFtZSI6Im5kaWdyYXppYSIsImlhdCI6MTYzNjM5Mzk5MiwiZXhwIjoxNjM2Mzk0NTkyLCJqdGkiOiI1MTU2NWJmYi01Mzc4LTRiYTUtYWJlZS04NjhjN2ZmYWMzZjkifQ.Mtc1zG-LaRBr7kFw5j3yDfL035hybmgUbBQ4tRvYX40-2eczVzgtG6IDyB0r8GXJRNTxHN4yRgOtFlKVsz5AMmlzLkZ6q0CiKBmiwosoMO35Fn-49WkDYyXht-wqke7FkMf5p1nZ_3qXqB-ELqxVLABaQan3rKLaF4KhSIa8DdocyYJhOQonb2Hv1tSTL-mw2x2oON4BZDiUT21j_lqWVgV1G4c5HsosK6wRF8AoO7xTe4ZcLVvOqKBiVuPECiVB3RPrh2SIRfq74dhQr4-rB11970we-bBhui_QXoV8LsRb9igYbbVWPNnC-Z4d6a4aK2e92FcVMwB_KdItzr-6tQ
