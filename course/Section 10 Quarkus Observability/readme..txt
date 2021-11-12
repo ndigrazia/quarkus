@@ -104,7 +104,50 @@ quarkus.log.sentry.dsn=https://60e03514e03b44e68bf777e32801bd17@o1066221.ingest.
 quarkus.log.sentry.in-app-packages=*
 
 
+https://www.youtube.com/watch?v=ds7mHECHNj0
+
 Collecting Metrics
 
 mvn io.quarkus:quarkus-maven-plugin:1.3.0.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId=metrics -Dextensions="metrics"
 
+GELF
+
+mvn io.quarkus:quarkus-maven-plugin:1.3.0.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId=gelf -DclassName="tech.donau.HelloResource" -Dpath="/hello" -Dextensions="logging-gelf"
+
+armar docker-compose
+
+sudo docker-compose up -d
+sudo docker-compose logs
+
+properties:
+quarkus.log.handler.gelf.enabled=true
+quarkus.log.handler.gelf.host=localhost
+quarkus.log.handler.gelf.port=12201
+
+
+http://localhost:9000/system/inputs
+admin/admin
+
+	
+Then, you need to create a UDP input in Graylog. You can do it from the Graylog web console (System → Input → Select GELF UDP) available at http://localhost:9000 or via the API.
+
+This curl example will create a new Input of type GELF UDP, it uses the default login from Graylog (admin/admin).
+
+curl -H "Content-Type: application/json" -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "X-Requested-By: curl" -X POST -v -d \
+'{"title":"udp input","configuration":{"recv_buffer_size":262144,"bind_address":"0.0.0.0","port":12201,"decompress_size_limit":8388608},"type":"org.graylog2.inputs.gelf.udp.GELFUDPInput","global":true}' \
+http://localhost:9000/api/system/inputs
+
+Elasticsearch: Max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+Solution: 
+	sysctl -w vm.max_map_count=262144
+
+sudo apt-get install netcat	
+nc -z -v -u localhost 12201
+ 
+https://quarkus.io/guides/centralized-log-management
+
+
+mvn io.quarkus.platform:quarkus-maven-plugin:2.4.2.Final:create -DprojectGroupId="org.acme" -DprojectArtifactId=gelf-logging    -DclassName="org.acme.quickstart.GelfLoggingResource" -Dpath="/gelf-logging" -Dextensions="resteasy,logging-gelf"
+
+vagrant
+	config.vm.network "forwarded_port", guest: 12201, host: 12201, host_ip: "127.0.0.1", protocol: "udp"

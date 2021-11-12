@@ -32,12 +32,22 @@ Add pom.xml
 	
 	apt-get install -y build-essential libz-dev
  
+	cd  /home/vagrant
 	curl https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-linux-amd64-20.2.0.tar.gz
 	tar -xzf graalvm-ce-java11-linux-amd64-20.2.0.tar.gz
-	export PATH=/vagrant/graalvm-ce-java11-20.2.0/bin:$PATH	
-	export JAVA_HOME=/vagrant/graalvm-ce-java11-20.2.0	
+	export PATH=/home/vagrant/graalvm-ce-java11-20.2.0/bin:$PATH	
+	export JAVA_HOME=/home/vagrant/graalvm-ce-java11-20.2.0	
 	  
-	gu install native-image	
+	sudo gu install native-image	
+	
+	consider this errors:
+		/bin/sh: 1: /vagrant/graalvm-ce-java11-20.2.0/bin/java: Permission denied
+
+			Solution:
+			
+			sudo chmod a+x /home/vagrant/graalvm-ce-java11-20.2.0/bin/java
+			sudo chmod a+x /home/vagrant/graalvm-ce-java11-20.2.0/bin/javac
+			sudo chown -R root:root /home/vagrant/graalvm-ce-java11-20.2.0
 	 
 	 
  2. install docker
@@ -47,6 +57,13 @@ Add pom.xml
 	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 	sudo apt-get update
 	sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+	
+	consider this errors:
+		dial unix /var/run/docker.sock: connect: permission denied.
+
+			Solution:
+				sudo usermod -aG docker $USER
+				newgrp docker
 	
  3. create  the project
  
