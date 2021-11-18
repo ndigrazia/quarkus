@@ -85,4 +85,51 @@ Add pom.xml
 
 https://developers.redhat.com/articles/2021/09/21/distributed-transaction-patterns-microservices-compared#the_modular_monolith	
 	
+
 	
+Building and inspecting project with Gradle
+
+
+#Install Gradle
+	Step 1. Download the latest Gradle distribution
+	
+	The current Gradle release is version 7.3, released on 09 Nov 2021. The distribution zip file comes in two flavors:
+
+		- Binary-only
+		- Complete, with docs and sources
+		
+		If in doubt, choose the binary-only version and browse docs and sources online.
+		
+	Step 2. Unpack the distribution
+	
+		Create a new directory C:\Gradle with File Explorer.
+		Unpack the Gradle distribution ZIP into C:\Gradle using an archiver tool of your choice.
+		
+	Step 3. Configure your system environment
+	
+		Gradle website need to be on your terminal’s path. 
+		Under System Variables select Path, then click Edit. Add an entry for C:\Gradle\gradle-7.3\bin. Click OK to save.
+		
+#Create project
+mvn io.quarkus:quarkus-maven-plugin:1.2.1.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId="gradle-example" -DclassName="tech.donau.BookRepository" -Dpath="/book" -Dextension="smallrye-fault-tolerance,vertx-web,resteasy-jsonb" -DbuildTool="gradle"
+
+#Run application
+./gradlew quarkusDev or ./gradlew quarkusDev -Dsuspend=true
+
+#List extensions
+	.\gradlew listExtensions
+
+#Add extensions
+	.\gradlew addExtension --extensions="camel-quarkus-timer"
+
+#Build
+	.\gradlew build
+	
+#Run
+ java -jar .\build\gradle-example-1.0-SNAPSHOT-runner.jar
+ 
+#UBER JAR
+	.\gradlew quarkusbuild --uber-jar
+ 
+
+
