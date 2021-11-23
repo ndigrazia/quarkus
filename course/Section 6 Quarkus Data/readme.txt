@@ -152,3 +152,90 @@ quarkus.neo4j.authentication.username = neo4j
 quarkus.neo4j.authentication.password = secret
 
 
+
+Amazon DynamoDB
+
+https://quarkus.io/guides/amazon-dynamodb
+
+mvn io.quarkus:quarkus-maven-plugin:1.2.1.Final:create -DprojectGroupId="tech.donau" -DprojectArtifactId=dynamodb -DclassName="tech.donau.BookResource" -Dpath="/books" -Dextensions="resteasy-jsonb,dynamodb,resteasy-mutiny"
+
+mvn io.quarkus.platform:quarkus-maven-plugin:2.4.2.Final:create -DprojectGroupId="org.acme" -DprojectArtifactId="amazon-dynamodb-quickstart"    -DclassName="org.acme.dynamodb.FruitResource" -Dpath="/fruits" -Dextensions="resteasy,resteasy-jackson,amazon-dynamodb,resteasy-mutiny"
+
+#Local DynamoDB
+
+	docker run --publish 8000:8000 amazon/dynamodb-local:1.11.477 -jar DynamoDBLocal.jar -inMemory -sharedDb
+
+	Open http://localhost:8000/shell in your browser.
+
+	Copy and paste the following code to the shell and run it:
+
+		var params = {
+			TableName: 'QuarkusFruits',
+			KeySchema: [{ AttributeName: 'fruitName', KeyType: 'HASH' }],
+			AttributeDefinitions: [{  AttributeName: 'fruitName', AttributeType: 'S', }],
+			ProvisionedThroughput: { ReadCapacityUnits: 1, WriteCapacityUnits: 1, }
+		};
+
+		dynamodb.createTable(params, function(err, data) {
+			if (err) ppJson(err);
+			else ppJson(data);
+
+		});
+
+
+	var params = {
+		TableName: 'Books',
+		KeySchema: [{ AttributeName: 'title', KeyType: 'HASH' }],
+		AttributeDefinitions: [{ AttributeName: 'title', AttributeType: 'S', }],
+		ProvisionedThroughput: { ReadCapacityUnits: 1, WriteCapacityUnits: 1, }
+	};
+	
+	dynamodb.createTable(params, function(err, data) {
+		if (err) ppJson(err);
+		else ppJson(data);
+	});
+	
+	application.properties
+	quarkus.dynamodb.endpoint-override=http://localhost:8000
+	quarkus.dynamodb.aws.region=eu-central-1
+	quarkus.dynamodb.aws.credentials.type=static
+	quarkus.dynamodb.aws.credentials.static-provider.access-key-id=test-key
+	quarkus.dynamodb.aws.credentials.static-provider.secret-access-key=test-secret
+
+
+
+# DynamoDB AWS
+	Before you can use the AWS SDKs with DynamoDB, you must get an AWS access key ID and secret access key.
+	https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SettingUp.DynamoWebService.html
+
+	#Connect to AWS
+
+	#aws dynamodb create-table --table-name QuarkusFruits \
+							  --attribute-definitions AttributeName=fruitName,AttributeType=S \
+							  --key-schema AttributeName=fruitName,KeyType=HASH \
+							  --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+					
+					
+	aws dynamodb create-table 	--table-name Books \
+								--attribute-definitions AttributeName=title,AttributeType=S \
+								--key-schema AttributeName=title,KeyType=HASH \
+								--provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+	
+	#application.properties
+					  
+		quarkus.dynamodb.aws.region=eu-central-1
+		quarkus.dynamodb.aws.credentials.type=default
+
+
+	#Add dependency synchronic client
+	<dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>url-connection-client</artifactId>
+    </dependency>
+
+
+
+ .\mvnw quarkus:dev
+
+
+

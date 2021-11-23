@@ -302,5 +302,7 @@ mvn archetype:generate -DarchetypeGroupId="io.quarkus" -DarchetypeArtifactId="qu
 
  
  
+ 
+ 
 
 
